@@ -1,0 +1,1005 @@
+/* ========== RESET & VARIABLES ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ========== NAVBAR STYLES ========== */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+/* Saat scroll, navbar bisa lebih kecil (opsional) */
+.navbar.scrolled {
+    padding: 5px 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.nav-logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.nav-logo a:hover {
+    color: #007bff;
+}
+
+/* Menu Desktop */
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-item a:hover{
+    color: #007bff;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    transition: all 0.3s;
+    position: relative;
+}
+
+/* Efek underline saat hover */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #007bff;
+    transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: #007bff;
+}
+
+/* Active link (section sedang dilihat) */
+.nav-link.active {
+    color: #007bff;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* ========== HAMBURGER MENU (Mobile) ========== */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: #333;
+    transition: all 0.3s ease;
+}
+
+/* ========== RESPONSIVE ========== */
+/* Tablet & Mobile */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: #ffffff;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 2rem 0;
+        gap: 1.5rem;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 0;
+    }
+
+    .nav-link {
+        font-size: 1.2rem;
+    }
+}
+
+/* ========== BERANDA / HERO SECTION ========== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    padding-top: 80px; /* offset untuk navbar fixed */
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Avatar / Foto Profil */
+.hero-avatar {
+    margin-bottom: 1.5rem;
+}
+
+.hero-avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 4px solid #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.hero-avatar img:hover {
+    transform: scale(1.05);
+}
+
+/* Sapaan */
+.hero-greeting {
+    font-size: 1.2rem;
+    color: #666;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+/* Nama */
+.hero-name {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+/* Job Title */
+.hero-title {
+    font-size: 1.3rem;
+    color: #007bff;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+/* Deskripsi */
+.hero-description {
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Tombol CTA */
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: 2px solid #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+}
+
+.btn-secondary:hover {
+    background-color: #007bff;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+}
+
+/* Sosial Media Icons */
+.hero-social {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+}
+
+.hero-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    color: #333;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero-social a:hover {
+    background-color: #007bff;
+    color: white;
+    transform: translateY(-3px);
+}
+/* ========== TECH STACK BADGES ========== */
+.hero-tech {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1.5rem 0 2rem 0;
+}
+
+.tech-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background-color: rgba(255, 45, 32, 0.1);
+    color: #ff2d20;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 45, 32, 0.3);
+    transition: all 0.3s;
+}
+
+.tech-badge:hover {
+    background-color: #ff2d20;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ========== RESPONSIF UPDATE ========== */
+@media (max-width: 768px) {
+    .hero-name {
+        font-size: 2rem;
+    }
+    
+    .hero-title {
+        font-size: 1rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+        padding: 0 1rem;
+    }
+    
+    .hero-buttons {
+        gap: 0.8rem;
+    }
+    
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .hero-avatar img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Tech badges responsif */
+    .hero-tech {
+        gap: 0.5rem;
+        margin: 1rem 0 1.5rem 0;
+    }
+    
+    .tech-badge {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* ========== ABOUT SECTION ========== */
+.about {
+    min-height: 100vh;
+    padding: 100px 0 80px;
+    background-color: #ffffff;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Section Header */
+.about-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.section-divider {
+    width: 60px;
+    height: 4px;
+    background: #ff2d20;
+    margin: 0 auto 1rem auto;
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* About Content (Grid 2 kolom) */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+/* Kolom Kiri - Teks Cerita */
+.about-text h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.about-text p {
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.about-list {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.about-list li {
+    color: #666;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.about-list li::before {
+    content: "▸";
+    color: #ff2d20;
+    font-weight: bold;
+}
+
+/* Kolom Kanan - Info Card & Skill Card */
+.info-card, .skill-card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+}
+
+.info-card:hover, .skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h3, .skill-card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #ff2d20;
+    display: inline-block;
+}
+
+/* Skill List - Menggunakan Tag / Chip */
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.skill-tag {
+    background-color: rgba(255, 45, 32, 0.1);
+    color: #ff2d20;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 45, 32, 0.2);
+}
+
+.skill-tag:hover {
+    background-color: #ff2d20;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Info Item (tidak berubah) */
+.info-item {
+    display: flex;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.info-label {
+    width: 100px;
+    font-weight: 600;
+    color: #333;
+}
+
+.info-value {
+    color: #666;
+    flex: 1;
+}
+
+.status-badge {
+    background: #ff2d20;
+    color: white;
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: inline-block;
+}
+
+/* ========== RESPONSIF ABOUT ========== */
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .about-text h3 {
+        font-size: 1.3rem;
+    }
+    
+    .info-item {
+        flex-direction: column;
+    }
+    
+    .info-label {
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+    
+    .about {
+        padding: 80px 0 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-container {
+        padding: 0 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+/* ========== PORTFOLIO SECTION ========== */
+.portfolio {
+    padding: 80px 0 60px;
+    background-color: #f8f9fa;
+}
+
+.portfolio-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Header */
+.portfolio-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+/* List Layout (vertical) */
+.portfolio-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+/* Setiap item portofolio - UKURAN DIPERKECIL */
+.portfolio-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Gambar - UKURAN DIPERKECIL */
+.portfolio-image {
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+}
+
+.portfolio-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-image img {
+    transform: scale(1.03);
+}
+
+/* Overlay hover untuk link - lebih kecil */
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 45, 32, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-link {
+    width: 38px;
+    height: 38px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff2d20;
+    font-size: 1rem;
+    transition: all 0.25s;
+    text-decoration: none;
+}
+
+.portfolio-link:hover {
+    transform: scale(1.08);
+    background: #ff2d20;
+    color: white;
+}
+
+/* Konten deskripsi - padding diperkecil */
+.portfolio-content {
+    padding: 1.2rem 1.5rem 1.2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.portfolio-content h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.portfolio-content p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+}
+
+/* Tech stack tags - lebih kecil */
+.portfolio-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+}
+
+.portfolio-tech span {
+    background: rgba(255, 45, 32, 0.1);
+    color: #ff2d20;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+/* Fitur tambahan (bullet points) - lebih kecil */
+.portfolio-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+.portfolio-features span {
+    font-size: 0.7rem;
+    color: #555;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Layout Zig-Zag */
+.portfolio-item.reverse {
+    direction: rtl;
+}
+
+.portfolio-item.reverse .portfolio-content {
+    direction: ltr;
+    padding: 1.2rem 0 1.2rem 1.5rem;
+}
+
+.portfolio-item.reverse .portfolio-image {
+    direction: ltr;
+}
+
+/* ========== RESPONSIF ========== */
+/* Tablet */
+@media (max-width: 768px) {
+    .portfolio {
+        padding: 60px 0 40px;
+    }
+    
+    .portfolio-container {
+        padding: 0 1.5rem;
+    }
+    
+    .portfolio-list {
+        gap: 1.5rem;
+    }
+    
+    .portfolio-item {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .portfolio-content {
+        padding: 1rem 1.2rem;
+    }
+    
+    .portfolio-item.reverse .portfolio-content {
+        padding: 1rem 1.2rem;
+        direction: ltr;
+    }
+    
+    .portfolio-item.reverse {
+        direction: ltr;
+    }
+    
+    .portfolio-image img {
+        height: 180px;
+    }
+    
+    .portfolio-content h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .portfolio-container {
+        padding: 0 1rem;
+    }
+    
+    .portfolio-list {
+        gap: 1.2rem;
+    }
+    
+    .portfolio-image img {
+        height: 160px;
+    }
+    
+    .portfolio-content {
+        padding: 0.8rem 1rem;
+    }
+    
+    .portfolio-content p {
+        font-size: 0.8rem;
+    }
+    
+    .portfolio-tech span {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.6rem;
+    }
+    
+    .portfolio-features {
+        gap: 0.6rem;
+    }
+    
+    .portfolio-features span {
+        font-size: 0.65rem;
+    }
+}
+
+/* ========== CONTACT SECTION ========== */
+.contact {
+    padding: 80px 0 80px;
+    background-color: #ffffff;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Header */
+.contact-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Wrapper 2 kolom */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+/* Kolom Kiri - Info Kontak */
+.contact-info h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.contact-info > p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 45, 32, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff2d20;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.contact-item:hover .contact-icon {
+    background: #ff2d20;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.contact-text h4 {
+    font-size: 0.9rem;
+    color: #999;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+}
+
+.contact-text p {
+    color: #333;
+    font-weight: 500;
+}
+
+/* Kolom Kanan - Form */
+.contact-form {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: all 0.3s;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff2d20;
+    box-shadow: 0 0 0 3px rgba(255, 45, 32, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #aaa;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background: #ff2d20;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.submit-btn:hover {
+    background: #cc241a;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 45, 32, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* ========== RESPONSIF CONTACT ========== */
+@media (max-width: 768px) {
+    .contact {
+        padding: 60px 0 60px;
+    }
+    
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-container {
+        padding: 0 1.5rem;
+    }
+    
+    .contact-info h3 {
+        font-size: 1.3rem;
+    }
+    
+    .contact-form {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-container {
+        padding: 0 1rem;
+    }
+    
+    .contact-item {
+        gap: 0.8rem;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .contact-text p {
+        font-size: 0.85rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 0.7rem 0.9rem;
+    }
+}
